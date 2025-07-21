@@ -1,0 +1,16 @@
+# Node modules
+node_modules/
+
+# enviroment
+.env
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.DS_Store
+
+# Build hoặc output
+dist/
+build/
