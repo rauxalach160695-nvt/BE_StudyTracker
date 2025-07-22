@@ -13,7 +13,7 @@ Badge.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    earAt: {
+    earnAt: {
       type: DataTypes.DATE,
       defaultValue: Sequelize.NOW,
     },

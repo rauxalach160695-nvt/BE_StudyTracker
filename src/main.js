@@ -19,7 +19,7 @@ app.get("/", async function (req, res) {
   // Send response to main screen
   res.send("Hello World!");
   // Create DB
-  await sequelize.sync()
+  await sequelize.sync({alter:true})
 });
 
 app.listen(process.env.BE_PORT, function () {
