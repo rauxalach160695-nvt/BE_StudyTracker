@@ -6,11 +6,14 @@ require("dotenv").config;
 const express = require("express");
 const sequelize = require("../config/db.config");
 const { Sequelize } = require("sequelize");
-// const User = require("./models/user")
-// const Avatar = require("./models/avatar")
 require("./models/association")
+const cors = require("cors")
+const routes = require("./routes/root")
 
-var app = express();
+const app = express();
+//Configuration middleware for express
+app.use(cors())
+app.use(express.json())
 
 //Define a GET route for the root path "/"
 app.get("/", async function (req, res) {
@@ -34,6 +37,8 @@ async function connectDb() {
     console.error("Unable to connect to the database:", error);
   }
 }
+
+routes(app)
 
 //    USE FOR mysql2
 // async function connectDb(req, res) {
