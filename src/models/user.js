@@ -12,7 +12,7 @@ User.init(
       unique: true,
     },
     password: {
-      type: DataTypes.STRING(20),
+      type: DataTypes.STRING,
       allowNull: false,
     },
     phoneNumber: {
@@ -35,6 +35,7 @@ User.init(
       beforeCreate: async (user) => {
         const salt = await bcrypt.genSalt(10);
         user.password = await bcrypt.hash(user.password, salt);
+        console.log(user.password)
       },
       beforeUpdate: async (user) => {
         if (user.changed("password")) {

@@ -2,18 +2,22 @@ const path = require("path");
 require("dotenv").config({
   path: path.resolve(__dirname, "../.env"),
 });
-require("dotenv").config;
 const express = require("express");
 const sequelize = require("../config/db.config");
 const { Sequelize } = require("sequelize");
 require("./models/association")
 const cors = require("cors")
+const auth = require("./middlewares/auth");
+const isAdmin = require("./middlewares/isAdmin");
 const routes = require("./routes/root")
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser");
 
 const app = express();
 //Configuration middleware for express
 app.use(cors())
 app.use(express.json())
+app.use(cookieParser())
 
 //Define a GET route for the root path "/"
 app.get("/", async function (req, res) {
@@ -31,6 +35,7 @@ app.listen(process.env.BE_PORT, function () {
 
 async function connectDb() {
   try {
+    await sequelize.sync({alter:true})
     await sequelize.authenticate();
     console.log("Connection has been established successfully.");
   } catch (error) {
